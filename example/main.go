@@ -5,28 +5,21 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"runtime"
 	"runtime/debug"
 
 	"github.com/burntcarrot/heaputil"
 )
 
 func main() {
-	// Simulating some memory allocations
 	for i := 0; i < 10; i++ {
 		_ = make([]byte, 1024)
 	}
 
 	f, err := os.Create("heapdump")
 	if err != nil {
-		panic("Could not open file for writing:" + err.Error())
+		log.Fatalf("Could not open file for writing: %v\n", err)
 	}
 
-	// Trigger GC to clean up unreachable objects
-	// not required, but recommended before taking a heap dump
-	runtime.GC()
-
-	// Perform a heap dump.
 	debug.WriteHeapDump(f.Fd())
 	f.Close()
 
@@ -39,10 +32,14 @@ func main() {
 
 	reader := bufio.NewReader(file)
 
-	// Use heaputil's PrintDump to print the dump.
-	// CAUTION: This will print a lot of information to stdout!
-	err = heaputil.PrintDump(reader)
+	// Use heaputil's ParseDump to get records
+	records, err := heaputil.ParseDump(reader)
 	if err != nil {
-		log.Fatalf("failed to print heap dump: %v\n", err)
+		log.Fatalf("failed to parse heap dump: %v\n", err)
+	}
+
+	// Print each record.
+	for _, r := range records {
+		fmt.Printf("%s\n", r.Repr)
 	}
 }

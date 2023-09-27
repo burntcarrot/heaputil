@@ -67,3 +67,134 @@ func ParsePointers(p ParentGuard, dp *DumpParamsRecord) ([]uint64, []uint64) {
 
 	return incoming, outgoing
 }
+
+func GetRecordType(record Record) RecordType {
+	switch r := record.(type) {
+	case *EOFRecord:
+		return EOF
+	case *ObjectRecord:
+		return Object
+	case *OtherRootRecord:
+		return OtherRoot
+	case *TypeDescriptorRecord:
+		return TypeDescriptor
+	case *GoroutineRecord:
+		return Goroutine
+	case *StackFrameRecord:
+		return StackFrame
+	case *DumpParamsRecord:
+		return DumpParams
+	case *RegisteredFinalizerRecord:
+		return RegisteredFinalizer
+	case *ITabRecord:
+		return ITab
+	case *OSThreadRecord:
+		return OSThread
+	case *MemStatsRecord:
+		return MemStats
+	case *QueuedFinalizerRecord:
+		return QueuedFinalizer
+	case *DataSegmentRecord:
+		return DataSegment
+	case *BSSSegmentRecord:
+		return BSSSegment
+	case *DeferRecordRecord:
+		return DeferRecord
+	case *PanicRecordRecord:
+		return PanicRecord
+	case *AllocFreeProfileRecord:
+		return AllocFreeProfile
+	case *AllocStackTraceSampleRecord:
+		return AllocStackTraceSample
+	default:
+		fmt.Printf("cannot find type: %T\n", r)
+		return -1
+	}
+}
+
+func GetRecordTypeStr(record Record) string {
+	switch r := record.(type) {
+	case *EOFRecord:
+		return "EOF"
+	case *ObjectRecord:
+		return "Object"
+	case *OtherRootRecord:
+		return "OtherRoot"
+	case *TypeDescriptorRecord:
+		return "TypeDescriptor"
+	case *GoroutineRecord:
+		return "Goroutine"
+	case *StackFrameRecord:
+		return "StackFrame"
+	case *DumpParamsRecord:
+		return "DumpParams"
+	case *RegisteredFinalizerRecord:
+		return "RegisteredFinalizer"
+	case *ITabRecord:
+		return "ITab"
+	case *OSThreadRecord:
+		return "OSThread"
+	case *MemStatsRecord:
+		return "MemStats"
+	case *QueuedFinalizerRecord:
+		return "QueuedFinalizer"
+	case *DataSegmentRecord:
+		return "DataSegment"
+	case *BSSSegmentRecord:
+		return "BSSSegment"
+	case *DeferRecordRecord:
+		return "DeferRecord"
+	case *PanicRecordRecord:
+		return "PanicRecord"
+	case *AllocFreeProfileRecord:
+		return "AllocFreeProfile"
+	case *AllocStackTraceSampleRecord:
+		return "AllocStackTraceSample"
+	default:
+		fmt.Printf("cannot find type: %T\n", r)
+		return "Unknown"
+	}
+}
+
+func GetStrFromRecordType(rType RecordType) string {
+	switch rType {
+	case EOF:
+		return "EOF"
+	case Object:
+		return "Object"
+	case OtherRoot:
+		return "OtherRoot"
+	case TypeDescriptor:
+		return "TypeDescriptor"
+	case Goroutine:
+		return "Goroutine"
+	case StackFrame:
+		return "StackFrame"
+	case DumpParams:
+		return "DumpParams"
+	case RegisteredFinalizer:
+		return "RegisteredFinalizer"
+	case ITab:
+		return "ITab"
+	case OSThread:
+		return "OSThread"
+	case MemStats:
+		return "MemStats"
+	case QueuedFinalizer:
+		return "QueuedFinalizer"
+	case DataSegment:
+		return "DataSegment"
+	case BSSSegment:
+		return "BSSSegment"
+	case DeferRecord:
+		return "DeferRecord"
+	case PanicRecord:
+		return "PanicRecord"
+	case AllocFreeProfile:
+		return "AllocFreeProfile"
+	case AllocStackTraceSample:
+		return "AllocStackTraceSample"
+	default:
+		return "Unknown"
+	}
+}

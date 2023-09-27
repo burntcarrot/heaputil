@@ -7,14 +7,13 @@ Check [example](./example/main.go).
 Output:
 
 ```
-Created a sample heapdump.
-DumpParams (big endian = false, ptrsize = 8, heap start = 0xc000000000, heap end = 0xc004000000, architecture = amd64, GOEXPERIMENT = go1.20, numCPU = 5)
-TypeDescriptor at address 0x4a1900 (name = github.com/burntcarrot/heaputil/record., size = 8, hasType = false)
-ITab at address 0x4d2508, type descriptor address = 0x4a1900
-TypeDescriptor at address 0x4a3180 (name = github.com/burntcarrot/heaputil/record., size = 8, hasType = false)
-ITab at address 0x4d27b0, type descriptor address = 0x4a3180
-TypeDescriptor at address 0x4a4ee0 (name = io.discard, size = 0, hasType = false)
-ITab at address 0x4d2488, type descriptor address = 0x4a4ee0
-TypeDescriptor at address 0x4abd80 (name = encoding/binary.littleEndian, size = 0, hasType = false)
-ITab at address 0x4d2bb8, type descriptor address = 0x4abd80
+....
+OS thread at address 0x54b300 (Go internal ID = 0, OS ID = 53413)
+Data segment at address 0x546660 (content size = 16784, pointers = 1184)
+BSS segment at address 0x54a800 (content size = 196376, pointers = 10185)
+Registered finalizer at address 0xc000078060, FuncVal ptr address = 0x4b7078, type = 4832448, object type = 4832448
+Registered finalizer at address 0xc0000a8000, FuncVal ptr address = 0x4b7078, type = 4832448, object type = 4832448
+Registered finalizer at address 0xc0000a8060, FuncVal ptr address = 0x4b7078, type = 4832448, object type = 4832448
+Registered finalizer at address 0xc0000a80c0, FuncVal ptr address = 0x4b7078, type = 4832448, object type = 4832448
+....
 ```
